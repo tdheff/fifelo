@@ -1,8 +1,136 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  font-family: 'Open Sans', sans-serif;
+  color: #444233;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-a {
-  color: #00B7FF;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bree Serif', serif;
+}
+
+/* COLORS
+
+
+   blue: #69D2E7
+   teal: #A7DBD8
+    tan: #E0E4CC
+lorange: #F38630
+dorange: #FA6900
+
+ orange: #F87054
+    tan: #F2F2E8
+"black": #444233
+
+*/
+
+body {
+  background: #F2F2E8;
+}
+
+h1 {
+  font-size: 4.0em;
+  text-align: center;
+  background: #F87054;
+  color: #F2F2E8;
+  padding-top: 20px;
+  padding-bottom: 23px;
+  margin-bottom: 20px;
+}
+
+h1 span {
+  font-family: 'Bree Serif', serif;
+  color: #69D2E7;
+}
+
+/* STUFF FOR USERS */
+
+.users {
+  margin: 0px auto;
+  width: 500px;
+  font-size: 1.2em;
+}
+
+.users div {
+  display: inline-block;
+}
+
+.user {
+  padding: 5px;
+  border-top: solid 1px #E0E4CC;
+}
+
+.user-name {
+  width: 200px;
+}
+
+.user-rating {
+  width: 200px;
+}
+
+.user-games {
+  width: 50px;
+}
+
+/* STUFF FOR USER CATEGORIES */
+
+.user-cats {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.user-cat-name {
+  width: 200px;
+}
+
+.user-cat-rating {
+  width: 200px;
+}
+
+.user-cat-games {
+  width: 50px;
 }

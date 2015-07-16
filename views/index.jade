@@ -1,5 +1,43 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1
+    span FIF
+    | ELO
+
+  div.users
+    div.user-cats
+        div.user-cat-name name
+        div.user-cat-rating rating
+        div.user-cat-games games
+    each user in users
+      div.user
+        div.user-name!= user.name
+        div.user-rating!= user.rating
+        div.user-games!= user.games
+
+  br
+  br
+
+  div.create-game
+    form(action="/games", method="post")
+
+      span Home Player
+      select(name="home")
+        each user in users
+          option(value=user._id)!= user.name
+      span Home Score
+      input(name="home_score", value="home_score", type="number")
+
+      span Away Player
+      select(name="away")
+        each user in users
+          option(value=user._id)!= user.name
+      span Away Score
+      input(name="away_score", value="away_score", type="number")
+
+      input(type="submit", value="submit")
+  
+  div.games
+    each game in games
+      div.game blahhh

@@ -4,17 +4,10 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-var Database = require('nedb');
 
-var db = {}
-db.users = new Database({ filename: './db/users.db', autoload: true});
-db.games = new Database({ filename: './db/games.db', autoload: true});
-
-var app = express();
+var app = module.exports =express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -33,8 +26,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+// import routes and functionality
+var index = require('./controllers/index');
+var user = require('./controllers/user');
+var games = require('./controllers/game')
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
