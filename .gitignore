@@ -28,3 +28,6 @@ node_modules
 
 # Stupid vim shit
 *.swp
+
+# dont bring databases
+*.db
