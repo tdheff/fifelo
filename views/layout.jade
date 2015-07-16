@@ -4,5 +4,15 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300|Bree+Serif', rel='stylesheet', type='text/css')
+    script(src='/javascripts/jquery-2.1.4.min.js')
+    script(src='/bower_components/moment/moment.js')
+    script(type='text/javascript').
+      $(function() {
+        console.log('ready');
+        $('.game-date').each(function() {
+          var el = $(this);
+          el.html(moment(el.html()).fromNow());
+        });
+      });
   body
     block content

@@ -22,22 +22,31 @@ block content
   div.create-game
     form(action="/games", method="post")
 
-      span Home Player
       select(name="home")
         each user in users
           option(value=user._id)!= user.name
-      span Home Score
-      input(name="home_score", value="home_score", type="number")
+      input.num(name="home_score", value="home_score", type="number")
 
-      span Away Player
+      span vs.
+
+      input.num(name="away_score", value="away_score", type="number")
       select(name="away")
         each user in users
           option(value=user._id)!= user.name
-      span Away Score
-      input(name="away_score", value="away_score", type="number")
 
       input(type="submit", value="submit")
   
   div.games
     each game in games
-      div.game blahhh
+      div.game
+        div.game-date!= game.date
+        div.game-results
+          div.game-winner-delta (#{game.winner_delta})
+          div.game-winner!= game.winner_name
+          div.game-winner-score!= game.winner_score
+          |--
+          div.game-loser-score!= game.loser_score
+          div.game-loser!= game.loser_name
+          div.game-loser-delta (#{game.loser_delta})
+          
+          
