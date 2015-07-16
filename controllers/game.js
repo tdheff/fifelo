@@ -8,11 +8,12 @@ app.post('/games', function(req, res) {
   var doc = req.body;
   if (doc.home === doc.away) {
     res.redirect('/');
-  } else if (doc.home_score <= 0 || doc.away_score <= 0 || doc.home_score == doc.away_score) {
+  } else if (doc.home_score < 0 || doc.away_score < 0 || doc.home_score == doc.away_score) {
     res.redirect('/');
   } else {
     elocalc(doc, function(new_doc) {
       res.redirect('/');
+      console.log(new_doc)
       db.games.insert(new_doc);
     });
   }
@@ -31,9 +32,9 @@ var elocalc = function (game, done) {
   }
 
   db.users.findOne({_id: winner}, function(err, winner_user) {
-    if(err) { return; };
+    if(err) { console.log(err); return; };
     db.users.findOne({_id: loser}, function(err, loser_user) {
-      if(err) {return; };
+      if(err) { console.log(err); return; };
 
       var winner_new_rating = elo.newRatingIfWon(winner_user.rating, loser_user.rating);
       var loser_new_rating = elo.newRatingIfLost(loser_user.rating, winner_user.rating);
