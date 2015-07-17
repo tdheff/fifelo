@@ -116,6 +116,10 @@ h1 span {
   width: 50px;
 }
 
+.user-ranking {
+  font-weight: 700;
+}
+
 /* STUFF FOR USER CATEGORIES */
 
 .user-cats {

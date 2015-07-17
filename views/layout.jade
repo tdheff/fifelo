@@ -13,6 +13,10 @@ html
           var el = $(this);
           el.html(moment(el.html()).fromNow());
         });
+
+        $('.user-ranking').each(function(index,element) {
+          $(this).html((index+1).toString() + '. ');
+        });
       });
   body
     block content

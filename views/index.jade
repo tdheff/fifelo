@@ -12,7 +12,9 @@ block content
         div.user-cat-games games
     each user in users
       div.user
-        div.user-name!= user.name
+        div.user-name
+          span.user-ranking
+          | #{user.name}
         div.user-rating!= user.rating
         div.user-games!= user.games
 
