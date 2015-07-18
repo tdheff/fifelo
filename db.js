@@ -1,3 +1,5 @@
+var app = require('./app.js')
+
 var Firebase = require("firebase");
 
 if ('development' == app.get('env')) {
