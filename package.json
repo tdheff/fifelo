@@ -8,6 +8,7 @@
   "dependencies": {
     "arpad": "^0.1.0",
     "express": "3.4.8",
+    "firebase": "^2.2.7",
     "jade": "*",
     "nedb": "^1.1.2"
   }

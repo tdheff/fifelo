@@ -6,7 +6,7 @@ app.get('/users', function(req,res) {
 });
 
 app.post('/users', function(req, res) {
-  var doc = {name: req.body.name, rating: 1500, games: 0}
-  db.users.insert(doc);
+  var doc = {name: req.body.name, rating: 1500, games: 0, wins: 0, losses: 0}
+  db.users.push(doc);
   res.redirect('/');
 });

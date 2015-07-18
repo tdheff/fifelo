@@ -1,7 +1,13 @@
-var Database = require('nedb');
+var Firebase = require("firebase");
 
-var db = {}
-db.users = new Database({ filename: './db/users.db', autoload: true});
-db.games = new Database({ filename: './db/games.db', autoload: true});
+if ('development' == app.get('env')) {
+    var ref = new Firebase("https://fifelo.firebaseio.com/dev");
+} else {
+    var ref = new Firebase("https://fifelo.firebaseio.com/prod");
+}
+
+var db = {};
+db.users = ref.child("users");
+db.games = ref.child("games")
 
 module.exports = db;
