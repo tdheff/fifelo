@@ -11,7 +11,7 @@ html
         console.log('ready');
         $('.game-date').each(function() {
           var el = $(this);
-          el.html(moment(el.html()).fromNow());
+          el.html(moment(el.html(), 'x').fromNow());
         });
 
         $('.user-ranking').each(function(index,element) {
