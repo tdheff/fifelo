@@ -4,6 +4,14 @@ var arpad = require('arpad');
 
 var elo = new arpad();
 
+db.games.on('child_added', function(childSnapshot, prevChildKey) {
+  elocalc(childSnapshot);
+});
+
+db.games.once('child_removed', function(childSnapshot, prevChildKey) {
+  recalculate();
+});
+
 app.post('/games', function(req, res) {
   var doc = req.body;
   if (doc.home === doc.away) {
@@ -11,36 +19,36 @@ app.post('/games', function(req, res) {
   } else if (doc.home_score < 0 || doc.away_score < 0 || doc.home_score == doc.away_score) {
     res.redirect('/');
   } else {
-    elocalc(doc, function(new_doc) {
-      res.redirect('/');
-      db.games.push(new_doc);
-    });
+    db.games.push(doc);
+    res.redirect('/');
   }
 });
 
-var elocalc = function (game, done) {
+var elocalc = function (gameSnapshot) {
+  var game = gameSnapshot.val();
+  var gameRef = gameSnapshot.ref();
+  
   var winner, loser;
   var winner_score, loser_score;
   var winner_rating, loser_rating;
-  if (game.home_score > game.away_score) {
-    winner = game.home, loser = game.away;
-    winner_score = game.home_score, loser_score = game.away_score;
+  if (game.winner && game.loser) {
+    winner = game.winner, loser = game.loser;
+    winner_score = game.winner_score, loser_score = game.loser_score;
   } else {
-    winner = game.away, loser = game.home;
-    winner_score = game.away_score, loser_score = game.home_score;
+    if (game.home_score > game.away_score) {
+      winner = game.home, loser = game.away;
+      winner_score = game.home_score, loser_score = game.away_score;
+    } else {
+      winner = game.away, loser = game.home;
+      winner_score = game.away_score, loser_score = game.home_score;
+    }
   }
 
   db.users.child(winner).once("value", function(winner_ref) {
     db.users.child(loser).once("value", function(loser_ref) {
 
-      console.log(winner);
       winner_user = winner_ref.val();
       loser_user = loser_ref.val();
-
-      console.log("#########################");
-      console.log(winner_user);
-      console.log(loser_user);
-      console.log("#########################");
 
       var winner_new_rating = elo.newRatingIfWon(winner_user.rating, loser_user.rating);
       var loser_new_rating = elo.newRatingIfLost(loser_user.rating, winner_user.rating);
@@ -65,7 +73,7 @@ var elocalc = function (game, done) {
       new_game.loser_new_rating = loser_new_rating;
       new_game.loser_delta = loser_new_rating - loser_user.rating;
       
-      done(new_game);
+      gameRef.update(new_game);
 
     }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
@@ -73,4 +81,26 @@ var elocalc = function (game, done) {
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
+
 };
+
+// recalculate elos based on past games
+var recalculate = function() {
+  db.users.once("value", function(users) {
+    // first reset all users
+    users.forEach(function(childSnap) {
+      childSnap.ref().update({rating: 1500, games: 0, wins: 0, losses: 0});
+    });
+
+    // recalculate all the games
+    db.games.once("value", function(games) {
+      games.forEach(function(childSnap) {
+        elocalc(childSnap);
+      });
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+}

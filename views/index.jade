@@ -10,6 +10,8 @@ block content
         div.user-cat-name name
         div.user-cat-rating rating
         div.user-cat-games games
+        div.user-cat-wins wins
+        div.user-cat-losses losses
     each user in users
       div.user
         div.user-name
@@ -17,6 +19,8 @@ block content
           | #{user.name}
         div.user-rating!= user.rating
         div.user-games!= user.games
+        div.user-wins!= user.wins
+        div.user-losses!= user.losses
 
   br
   br
