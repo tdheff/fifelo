@@ -91,29 +91,36 @@ h1 span {
 
 .users {
   margin: 0px auto;
-  width: 500px;
+  width: 60%;
   font-size: 1.2em;
 }
 
-.users div {
+.user div {
   display: inline-block;
 }
 
 .user {
   padding: 5px;
-  border-top: solid 1px #E0E4CC;
 }
 
 .user-name {
-  width: 200px;
+  width: 60%;
 }
 
 .user-rating {
-  width: 200px;
+  width: 10%;
 }
 
 .user-games {
-  width: 50px;
+  width: 10%;
+}
+
+.user-wins {
+  width: 10%;
+}
+
+.user-losses {
+  width: 10%;
 }
 
 .user-ranking {
@@ -122,21 +129,33 @@ h1 span {
 
 /* STUFF FOR USER CATEGORIES */
 
+.user-cats div {
+  display: inline-block;
+}
+
 .user-cats {
   font-weight: 700;
   margin-bottom: 5px;
 }
 
 .user-cat-name {
-  width: 200px;
+  width: 60%;
 }
 
 .user-cat-rating {
-  width: 200px;
+  width: 10%;
 }
 
 .user-cat-games {
-  width: 50px;
+  width: 10%;
+}
+
+.user-cat-wins {
+  width: 10%;
+}
+
+.user-cat-losses {
+  width: 10%;
 }
 
 /* form stuff */
