@@ -207,6 +207,10 @@ input.num {
   margin-right: 5px;
 }
 
+input.submit {
+  margin-left: 5px;
+}
+
 /* STUFF FOR GAMES */
 
 .games {
