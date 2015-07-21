@@ -10,6 +10,7 @@
     "express": "3.4.8",
     "firebase": "^2.2.7",
     "jade": "*",
-    "nedb": "^1.1.2"
+    "nedb": "^1.1.2",
+    "underscore": "^1.8.3"
   }
 }
