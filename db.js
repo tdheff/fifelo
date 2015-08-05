@@ -1,15 +1,14 @@
 var app = require('./app.js')
 
-var Firebase = require("firebase");
+var mongodb = require("mongodb");
+var monk = require("monk");
 
 if ('development' == app.get('env')) {
-    var ref = new Firebase("https://fifelo.firebaseio.com/dev");
+    var database = monk("localhost:27017/fifelo");
 } else {
-    var ref = new Firebase("https://fifelo.firebaseio.com/prod");
+    var database = monk("localhost:27017/fifelo");
 }
 
-var db = {};
-db.users = ref.child("users");
-db.games = ref.child("games")
+var db = {users: database.get("users"), games: database.get("games")}
 
 module.exports = db;

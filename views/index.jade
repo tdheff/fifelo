@@ -29,19 +29,19 @@ block content
     form(action="/games", method="post")
 
       select(name="home")
-        each user, id in users
-          option(value=id)!= user.name
+        each user in users
+          option(value=user._id)!= user.name
       input.num(name="home_score", value="home_score", type="number")
 
       span vs.
 
       input.num(name="away_score", value="away_score", type="number")
       select(name="away")
-        each user, id in users
-          option(value=id)!= user.name
+        each user in users
+          option(value=user._id)!= user.name
 
       input.submit(type="submit", value="submit")
-  
+
   div.games
     each game in games
       div.game
@@ -54,5 +54,3 @@ block content
           div.game-loser-score!= game.loser_score
           div.game-loser!= game.loser_name
           div.game-loser-delta (#{game.loser_delta})
-          
-          
